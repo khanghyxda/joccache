@@ -4,6 +4,7 @@
   "description": "Cache Image",
   "main": "index.js",
   "dependencies": {
+    "dateformat": "^3.0.3",
     "express": "^4.16.3",
     "mime": "^2.3.1",
     "mime-types": "^2.1.20",

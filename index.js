@@ -1,9 +1,9 @@
 const express = require('express')
-const request = require('request');
 const path = require('path');
 const fs = require('fs');
 var http = require('http');
 var https = require('https');
+var dateFormat = require('dateformat');
 
 const app = express();
 var port = normalizePort(process.env.PORT || '3000');
@@ -99,10 +99,10 @@ function makeFilename() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    for (var i = 0; i < 20; i++)
+    for (var i = 0; i < 5; i++)
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
-    return text;
+    return dateFormat(new Date(), "yyyymmddHHMMss") + text;
 }
 
 function getFilesizeInBytes(filename) {
