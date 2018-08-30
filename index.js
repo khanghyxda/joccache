@@ -73,7 +73,7 @@ function normalizePort(val) {
 }
 
 function download(url, filename, callback) {
-    http.get(url, function (response) {
+    https.get(url, function (response) {
         var extension = response.headers['content-type'].split('/')[1];
         response.pipe(fs.createWriteStream(__dirname + "/imgs/" + filename + "." + extension))
             .on('close', function () {
