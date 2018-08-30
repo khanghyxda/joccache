@@ -10,10 +10,7 @@ var url = "https://firebasestorage.googleapis.com/v0/b/coin-ea1b0.appspot.com/o/
 var cacheImg = {};
 
 app.get('/', function (req, res) {
-    var filename = "google.png";
-    download(url, filename, function () {
-        res.sendFile(__dirname + "/imgs/" + filename)
-    });
+    res.send('Hello World!')
 })
 
 app.get('/reset', function (req, res) {
