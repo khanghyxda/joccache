@@ -45,7 +45,7 @@ app.get('/image', function (req, res) {
 })
 
 app.listen(port, () => console.log('Example app listening on port 3000!'))
-deleteAllImg(__dirname + "/imgs/");
+//deleteAllImg(__dirname + "/imgs/");
 
 function normalizePort(val) {
     var port = parseInt(val, 10);
