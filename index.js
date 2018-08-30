@@ -36,7 +36,8 @@ app.get('/image', function (req, res) {
     filename = makeFilename();
     try {
         download(url, filename, function (extension) {
-            var filePath = __dirname + "/imgs/" + filename + "." + extension;
+            filename = filename + "." + extension;
+            var filePath = __dirname + "/imgs/" + filename;
             var filesize = getFilesizeInBytes(filePath);
             if (filesize < 1000) {
                 fs.unlinkSync(filePath);
