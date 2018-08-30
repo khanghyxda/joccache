@@ -2,10 +2,11 @@ const express = require('express')
 const request = require('request');
 const path = require('path');
 const fs = require('fs');
+var http = require('http');
+var https = require('https');
 
 const app = express();
 var port = normalizePort(process.env.PORT || '3000');
-var url = "https://firebasestorage.googleapis.com/v0/b/coin-ea1b0.appspot.com/o/images%2FG8uAn4Nm3zpvSn4LvvzR?alt=media&token=99d5ca28-a97e-4a11-826e-962907cbfe6c";
 
 var cacheImg = {};
 
@@ -62,12 +63,11 @@ function normalizePort(val) {
     return false;
 }
 
-function download(uri, filename, callback, error) {
-    request.head(uri, function (err, res, body) {
-        request(uri)
-            .pipe(fs.createWriteStream(__dirname + "/imgs/" + filename))
-            .on('close', callback)
-            .on('error', function (e) { console.log(e) });
+function download(url, filename, callback, error) {
+    https.get(url, function(response) {
+        response.pipe(__dirname + "/imgs/" + filename)
+        .on('close', callback)
+        .on('error', function (e) { console.log(e) });
     });
 };
 
