@@ -19,6 +19,12 @@ app.get('/reset', function (req, res) {
     deleteAllImg(__dirname + "/imgs/");
 })
 
+app.get('/download', function (req, res) {
+    var filename = "noimage.png";
+    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+    res.download(__dirname + "/noimage.png", "noimage.png")
+})
+
 app.get('/image', function (req, res) {
     var url = req.query.url;
     var type = req.query.type;
@@ -64,8 +70,8 @@ function normalizePort(val) {
 }
 
 function download(url, filename, callback, error) {
-    https.get(url, function(response) {
-        response.pipe(__dirname + "/imgs/" + filename)
+    http.get(url, function(response) {
+        response.pipe(fs.createWriteStream(__dirname + "/imgs/" + filename))
         .on('close', callback)
         .on('error', function (e) { console.log(e) });
     });
