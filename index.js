@@ -73,14 +73,25 @@ function normalizePort(val) {
 }
 
 function download(url, filename, callback) {
-    https.get(url, function (response) {
-        var extension = response.headers['content-type'].split('/')[1];
-        response.pipe(fs.createWriteStream(__dirname + "/imgs/" + filename + "." + extension))
-            .on('close', function () {
-                callback(extension);
-            })
-            .on('error', function (e) { console.log(e) });
-    });
+    if(url.includes("https")) {
+        https.get(url, function (response) {
+            var extension = response.headers['content-type'].split('/')[1];
+            response.pipe(fs.createWriteStream(__dirname + "/imgs/" + filename + "." + extension))
+                .on('close', function () {
+                    callback(extension);
+                })
+                .on('error', function (e) { console.log(e) });
+        });
+    } else {
+        http.get(url, function (response) {
+            var extension = response.headers['content-type'].split('/')[1];
+            response.pipe(fs.createWriteStream(__dirname + "/imgs/" + filename + "." + extension))
+                .on('close', function () {
+                    callback(extension);
+                })
+                .on('error', function (e) { console.log(e) });
+        });
+    }
 };
 
 function makeFilename() {
