@@ -70,7 +70,7 @@ function normalizePort(val) {
 }
 
 function download(url, filename, callback, error) {
-    http.get(url, function(response) {
+    https.get(url, function(response) {
         response.pipe(fs.createWriteStream(__dirname + "/imgs/" + filename))
         .on('close', callback)
         .on('error', function (e) { console.log(e) });
