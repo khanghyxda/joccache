@@ -22,7 +22,7 @@ app.get('/image', function (req, res) {
     var url = req.query.url;
     var type = req.query.type;
     var filename = "";
-    if (cacheImg[url+type] != undefined) {
+    if (cacheImg[url + type] != undefined) {
         filename = cacheImg[url + type].filename;
         return res.sendFile(__dirname + "/imgs/" + filename)
     }
@@ -45,7 +45,8 @@ app.get('/image', function (req, res) {
 })
 
 app.listen(port, () => console.log('Example app listening on port 3000!'))
-//deleteAllImg(__dirname + "/imgs/");
+createDir(__dirname + "/imgs/");
+deleteAllImg(__dirname + "/imgs/");
 
 function normalizePort(val) {
     var port = parseInt(val, 10);
@@ -85,7 +86,11 @@ function getFilesizeInBytes(filename) {
     var fileSizeInBytes = stats["size"]
     return fileSizeInBytes
 }
-
+function createDir(directory) {
+    if (!fs.existsSync(directory)) {
+        fs.mkdirSync(directory);
+    }
+}
 function deleteAllImg(directory) {
     fs.readdir(directory, (err, files) => {
         if (err) throw err;
