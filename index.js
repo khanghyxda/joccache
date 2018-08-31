@@ -39,7 +39,7 @@ app.get('/image', function (req, res) {
             filename = filename + "." + extension;
             var filePath = __dirname + "/imgs/" + filename;
             var filesize = getFilesizeInBytes(filePath);
-            if (filesize < 1000) {
+            if (filesize < 200) {
                 fs.unlinkSync(filePath);
                 res.sendFile(__dirname + "/noimage.png");
             } else {
