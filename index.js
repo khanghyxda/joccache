@@ -47,6 +47,7 @@ app.get('/image', function (req, res) {
                 cache.url = url;
                 cache.filename = filename;
                 cacheImg[url] = cache;
+                res.setHeader('Cache-Control', 'public, max-age=3600');
                 res.sendFile(filePath)
             }
         });
